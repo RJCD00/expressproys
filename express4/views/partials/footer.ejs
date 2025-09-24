@@ -1,0 +1,51 @@
+<footer class="bg-light py-3 mt-4">
+    <div class="container text-center">
+      <p>&copy; 2025 - Proyecto Didáctico</p>
+    </div>
+  </footer>
+  <!-- jQuery CDN (requerido por Summernote) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <!-- Summernote CSS Local -->
+  <link href="/summernote/summernote-bs5.min.css" rel="stylesheet">
+  <!-- Summernote JS Local -->
+  <script src="/summernote/summernote-bs5.min.js"></script>
+  <!-- Bootstrap 5 JS CDN (para componentes de Bootstrap) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    // Función para inicializar Summernote
+    function initSummernote() {
+      if (typeof $ === 'undefined') {
+        console.error('jQuery no está cargado. Verifica el CDN o la conexión.');
+        return;
+      }
+      if (typeof $.fn.summernote === 'undefined') {
+        console.error('Summernote no está cargado. Verifica los archivos locales o la conexión.');
+        return;
+      }
+      $('#content').summernote({
+        height: 300,
+        minHeight: null,
+        maxHeight: null,
+        focus: true,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'italic', 'underline', 'clear']],
+          ['fontname', ['fontname']],
+          ['fontsize', ['fontsize']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    }
+    // Inicializar Summernote solo si hay un textarea con id="content"
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.querySelector('#content')) {
+        initSummernote();
+      }
+    });
+  </script>
+</body>
+</html>

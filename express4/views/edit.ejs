@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+<main class="container">
+  <h2 class="my-4">Editar Entrada</h2>
+  <form action="/update/<%= entry.id %>" method="POST" class="card p-4">
+    <div class="mb-3">
+      <label for="title" class="form-label">Título:</label>
+      <input type="text" id="title" name="title" class="form-control" value="<%= entry.title %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Contenido:</label>
+      <textarea id="content" name="content" class="form-control" required><%= entry.content %></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Actualizar</button>
+  </form>
+</main>
+<%- include('partials/footer') %>

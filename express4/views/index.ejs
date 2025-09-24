@@ -1,0 +1,27 @@
+ 
+<%- include('partials/header') %>
+<main class="container">
+  <h2 class="my-4">Entradas Recientes</h2>
+  <% if (entries.length === 0) { %>
+    <div class="alert alert-info" role="alert">
+      No hay entradas aún. ¡Crea una!
+    </div>
+  <% } else { %>
+    <div class="row">
+      <% entries.forEach(entry => { %>
+        <div class="col-md-6 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title"><%= entry.title %></h3>
+              <p class="card-text">Creado el: <%= entry.createdAt %></p>
+              <a href="/view/<%= entry.id %>" class="btn btn-primary btn-sm">Ver</a>
+              <a href="/edit/<%= entry.id %>" class="btn btn-secondary btn-sm">Editar</a>
+              <a href="/delete/<%= entry.id %>" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres eliminar esta entrada?')">Eliminar</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</main>
+<%- include('partials/footer') %>
