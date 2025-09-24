@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Código QR</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Generador de Código QR</h1>
+
+    <form action="/generate" method="post">
+        
+        <textarea name="qrText" id="qrText" placeholder="Ingrese el texto para generar el QR"><%= typeof qrText !== 'undefined' ? qrText : '' %></textarea>
+        <button type="submit">Generar QR</button>
+    </form>
+
+    <div id="qrcode-container">
+     
+            <% if (qrCode) { %>
+            <h2>Código QR Generado:</h2>
+            <img src="<%= qrCode %>" alt="Código QR">
+        <% } %>
+
+    </div>
+
+</body>
+</html>
