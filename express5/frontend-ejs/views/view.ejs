@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<main class="container my-4">
+  <% if (error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+  <% if (entry) { %>
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title"><%= entry.title %></h2>
+        <p class="card-text text-muted">Creado el: <%= entry.createdAt %></p>
+        <div class="card-text"><%- entry.content %></div>
+        <a href="/" class="btn btn-primary mt-3">Volver</a>
+        <a href="/edit/<%= entry.id %>" class="btn btn-secondary mt-3">Editar</a>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="alert alert-danger">Entrada no encontrada</div>
+  <% } %>
+</main>
+<%- include('partials/footer') %>

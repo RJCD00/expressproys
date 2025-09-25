@@ -1,0 +1,51 @@
+ <%- include('partials/header') %>
+<main class="container">
+  <h2 class="my-4">Entradas Recientes</h2>
+  <div id="entries-list"></div>
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      const response = await fetch('<%= process.env.BACKEND_URL %>/api/entries');
+      const entries = await response.json();
+      const list = document.getElementById('entries-list');
+      if (entries.length === 0) {
+        list.innerHTML = '<div class="alert alert-info">No hay entradas aún. ¡Crea una!</div>';
+      } else {
+        let html = '<div class="row">';
+        entries.forEach(entry => {
+          html += `
+            <div class="col-md-6 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">${entry.title}</h3>
+                  <p class="card-text">Creado el: ${entry.createdAt}</p>
+                  <a href="/view/${entry.id}" class="btn btn-primary btn-sm">Ver</a>
+                  <a href="/edit/${entry.id}" class="btn btn-secondary btn-sm">Editar</a>
+                  <button onclick="deleteEntry(${entry.id})" class="btn btn-danger btn-sm">Eliminar</button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        html += '</div>';
+        list.innerHTML = html;
+      }
+    } catch (err) {
+      console.error(err);
+      list.innerHTML = '<div class="alert alert-danger">Error al cargar entradas</div>';
+    }
+  });
+
+  async function deleteEntry(id) {
+    if (confirm('¿Seguro?')) {
+      try {
+        await fetch(`<%= process.env.BACKEND_URL %>/api/entries/${id}`, { method: 'DELETE' });
+        location.reload();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+</script>
+<%- include('partials/footer') %>

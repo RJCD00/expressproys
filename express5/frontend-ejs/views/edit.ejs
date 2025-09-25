@@ -1,0 +1,73 @@
+<%- include('partials/header') %>
+<main class="container my-4">
+  <h2>Editar Entrada</h2>
+  <% if (error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+  <% if (entry) { %>
+    <form action="/edit/<%= entry.id %>" method="POST" class="card p-4">
+      <div class="mb-3">
+        <label for="title" class="form-label">Título:</label>
+        <input type="text" id="title" name="title" value="<%= entry.title %>" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="content" class="form-label">Contenido:</label>
+        <textarea id="content" name="content" class="form-control"></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">Actualizar</button>
+    </form>
+  <% } else { %>
+    <div class="alert alert-danger">Entrada no encontrada</div>
+  <% } %>
+</main>
+<script>
+  // Verificar que jQuery esté cargado antes de ejecutar el script
+  if (typeof jQuery === 'undefined') {
+    console.error('jQuery no está cargado. Verifica que /js/jquery-3.6.0.min.js se cargue correctamente.');
+  } else {
+    console.log('jQuery cargado:', jQuery.fn.jquery);
+    $(document).ready(function() {
+      try {
+        // Depuración de scripts
+        console.log('Bootstrap tooltip:', typeof $.fn.tooltip !== 'undefined');
+        console.log('Summernote cargado:', typeof $.fn.summernote !== 'undefined');
+
+        if (!$.fn.tooltip) {
+          console.error('Bootstrap tooltip no está disponible. Verifica que bootstrap.bundle.min.js esté cargado.');
+          return;
+        }
+        if (!$.fn.summernote) {
+          console.error('Summernote no está disponible. Verifica que summernote-bs5.min.js esté cargado.');
+          return;
+        }
+
+        // Inicializar Summernote
+        $('#content').summernote({
+          height: 300,
+          toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+          ]
+        });
+
+        // Cargar contenido
+        <% if (entry && entry.content) { %>
+          console.log('Contenido a cargar:', `<%- entry.content %>`);
+          $('#content').summernote('code', `<%- entry.content %>`);
+        <% } else { %>
+          console.log('No hay contenido para cargar o entry.content es undefined');
+        <% } %>
+      } catch (err) {
+        console.error('Error al inicializar Summernote:', err);
+      }
+    });
+  }
+</script>
+<%- include('partials/footer') %>
