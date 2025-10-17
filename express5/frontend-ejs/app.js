@@ -3,7 +3,7 @@ const axios = require('axios');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 7001;  // Puerto fijo para ngrok
 // URL del backend público
 const backendUrl = 'https://express5-backend.onrender.com';
 
@@ -87,6 +87,7 @@ app.post('/delete/:id', async (req, res) => {
   }
 });
 
+// Iniciar servidor en puerto 7001
 app.listen(port, () => {
   console.log(`Frontend EJS corriendo en http://localhost:${port}`);
 });
