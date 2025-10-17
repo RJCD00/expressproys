@@ -1,11 +1,11 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
-require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const backendUrl = process.env.BACKEND_URL || 'http://localhost:3001';
+// URL del backend público
+const backendUrl = 'https://express5-backend.onrender.com';
 
 // Configuración de EJS y archivos estáticos
 app.set('view engine', 'ejs');
